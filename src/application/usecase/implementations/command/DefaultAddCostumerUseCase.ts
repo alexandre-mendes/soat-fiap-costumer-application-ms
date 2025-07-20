@@ -13,8 +13,8 @@ export class DefaultAddCostumerUseCase implements AddCostumerUseCase {
         if (finded)
             throw new DomainError('O CPF informado já possui cadastro.')
 
-        const client = new Costumer(input.cpf, input.name, input.email);
-        return await this.costumerRepository.save(client);
+        const costumer = new Costumer(input.cpf, input.name, input.email);
+        return await this.costumerRepository.save(costumer);
     }
 
 }
