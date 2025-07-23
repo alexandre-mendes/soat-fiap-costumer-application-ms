@@ -9,28 +9,14 @@ export class CostumerController {
 
     }
 
-    async findByCpf(req: Request, res: Response, next: NextFunction) {
-        try 
-        {
-            const costumer = await this.findCostumerByCpfUseCase.execute(req.params.cpf);
-            return res.json(this.parseToOutput(costumer)).status(201);
-        }
-        catch(error) 
-        {
-            next(error);
-        }
+    async findByCpf(req: Request, res: Response) {
+        const costumer = await this.findCostumerByCpfUseCase.execute(req.params.cpf);
+        return res.json(this.parseToOutput(costumer)).status(201);
     }
 
-    async create(req: Request, res: Response, next: NextFunction) {
-        try 
-        {
-            const costumer = await this.addCostumerUseCase.execute(req.body);
-            return res.json(this.parseToOutput(costumer)).status(201);
-        }
-        catch(error) 
-        {
-            next(error);
-        }
+    async create(req: Request, res: Response) {
+        const costumer = await this.addCostumerUseCase.execute(req.body);
+        return res.json(this.parseToOutput(costumer)).status(201);
     }
 
     private parseToOutput(costumer: Costumer | undefined): Output | undefined {
