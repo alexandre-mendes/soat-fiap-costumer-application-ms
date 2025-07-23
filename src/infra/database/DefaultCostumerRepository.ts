@@ -7,13 +7,23 @@ export class DefaultCostumerRepository implements CostumerRepository {
 
     constructor(private database: IDatabase<ICostumer>) { }
 
+    async findById(id: string): Promise<Costumer | undefined> {
+        const query = new DBQuery();
+        query.add(new DBCriteria('id', id, DBOperation.EQUALS));
+        const finded = await this.database.findByQuery(query);
+
+        if (finded)
+            return this.parseToEntity(finded);
+        return undefined;
+    }
+
     async save(costumer: Costumer): Promise<Costumer> {
         const db = this.parseToDB(costumer);
         const saved = await this.database.save(db);
         return this.parseToEntity(saved as ICostumer);
     }
 
-    async findByCpf(cpf: string): Promise<Costumer|undefined> {
+    async findByCpf(cpf: string): Promise<Costumer | undefined> {
         const query = new DBQuery();
         query.add(new DBCriteria('cpf', cpf, DBOperation.EQUALS));
         const finded = await this.database.findByQuery(query);

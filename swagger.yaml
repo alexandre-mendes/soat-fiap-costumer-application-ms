@@ -58,7 +58,47 @@ paths:
         '500':
           description: Erro interno do servidor
 
-  /api/costumers/{cpf}:
+  /api/costumers/{id}:
+    get:
+      summary: Buscar cliente pelo id
+      description: Retorna os dados de um cliente pelo ID.
+      tags:
+        - Clientes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  cpf:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+        '400':
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Erro interno do servidor
+
+  /api/costumers/cpf/{cpf}:
     get:
       summary: Buscar cliente por CPF
       description: Retorna os dados de um cliente pelo CPF.

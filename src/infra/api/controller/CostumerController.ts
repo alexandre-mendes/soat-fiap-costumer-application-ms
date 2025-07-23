@@ -2,16 +2,25 @@ import { Request, Response, NextFunction } from "express";
 import { Costumer } from "../../../domain/entity/Costumer";
 import { AddCostumerUseCase } from "../../../application/usecase/AddCostumerUseCase";
 import { FindCostumerByCpfUseCase } from "../../../application/usecase/FindCostumerByCpfUseCase";
+import { FindCostumerByIdUseCase } from "../../../application/usecase/FindCostumerByIdUseCase";
 
 export class CostumerController {
 
-    constructor(private addCostumerUseCase: AddCostumerUseCase, private findCostumerByCpfUseCase: FindCostumerByCpfUseCase) {
+    constructor(
+        private addCostumerUseCase: AddCostumerUseCase,
+        private findCostumerByCpfUseCase: FindCostumerByCpfUseCase,
+        private findCostumerByIdUseCase: FindCostumerByIdUseCase) {
 
+    }
+
+    async findById(req: Request, res: Response) {
+        const costumer = await this.findCostumerByIdUseCase.execute(req.params.id);
+        return res.json(this.parseToOutput(costumer)).status(200);
     }
 
     async findByCpf(req: Request, res: Response) {
         const costumer = await this.findCostumerByCpfUseCase.execute(req.params.cpf);
-        return res.json(this.parseToOutput(costumer)).status(201);
+        return res.json(this.parseToOutput(costumer)).status(200);
     }
 
     async create(req: Request, res: Response) {
