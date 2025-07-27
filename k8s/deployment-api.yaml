@@ -54,7 +54,7 @@ spec:
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: fastfood-configmap
+                  name: soat-fiap-costumer-application-ms-configmap
                   key: AWS_REGION
           resources:
             requests:
