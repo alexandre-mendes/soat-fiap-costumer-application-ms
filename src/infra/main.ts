@@ -7,6 +7,7 @@ import swaggerRouter from './api/swagger';
 import costumerRouter from './api/costumerRouter';
 import { NextFunction, Request, Response } from 'express';
 import { DomainError } from '../domain/error/DomainError';
+import healthRouter from './api/healthRouter';
 
 const app = express();
 app.use(express.json());
@@ -14,7 +15,8 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
-app.use(costumerRouter)
+app.use(costumerRouter);
+app.use(healthRouter);
 app.use(swaggerRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
