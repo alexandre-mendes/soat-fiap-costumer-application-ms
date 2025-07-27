@@ -57,11 +57,6 @@ jobs:
           aws eks update-kubeconfig \
           --name $CLUSTER_NAME \
           --region $AWS_REGION
-      # --- NOVO PASSO DE DEBUG ---
-      - name: Verify Kubeconfig
-        run: |
-          ls -la ~/.kube/
-          cat ~/.kube/config || true
 
       - name: Create Kubernetes Secret with AWS credentials
         run: |
@@ -78,6 +73,6 @@ jobs:
 
       - name: Update deployment with new image
         run: |
-          kubectl set image deployment/fastfood-api fastfood-api=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
-          kubectl rollout status deployment/fastfood-api --timeout=200s || kubectl get pods
-          kubectl get svc fastfood-api
+          kubectl set image deployment/soat-fiap-costumer-application-ms soat-fiap-costumer-application-ms=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+          kubectl rollout status deployment/soat-fiap-costumer-application-ms --timeout=200s || kubectl get pods
+          kubectl get svc soat-fiap-costumer-application-ms
