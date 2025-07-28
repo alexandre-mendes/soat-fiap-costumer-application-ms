@@ -11,8 +11,6 @@ RUN npm run build
 #Imagem final
 FROM node:22-slim
 
-RUN apk add --no-cache iputils-ping bind-tools netcat-openbsd postgresql-client
-
 WORKDIR /app
 
 COPY --from=builder /app/dist /app/dist
