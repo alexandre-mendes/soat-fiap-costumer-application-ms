@@ -1,6 +1,6 @@
 import { CostumerRepository } from "../../../../../src/application/repository/CostumerRepository";
 import { FindCostumerByCpfUseCase } from "../../../../../src/application/usecase/FindCostumerByCpfUseCase";
-import { DefaultFindCostumerByCpf } from "../../../../../src/application/usecase/implementations/query/DefaultFindCostumerByCpf";
+import { DefaultFindCostumerByCpfUseCase } from "../../../../../src/application/usecase/implementations/query/DefaultFindCostumerByCpfUseCase";
 import { Costumer } from "../../../../../src/domain/entity/Costumer";
 
 describe('Testa consulta de cliente por CPF', () => {
@@ -11,10 +11,11 @@ describe('Testa consulta de cliente por CPF', () => {
     beforeEach(() => {
         mockCostumerRepository = {
             findByCpf: jest.fn(),
+            findById: jest.fn(),
             save: jest.fn()
         } as jest.Mocked<CostumerRepository>;
 
-        findCostumerByCpfUseCase = new DefaultFindCostumerByCpf(mockCostumerRepository);
+        findCostumerByCpfUseCase = new DefaultFindCostumerByCpfUseCase(mockCostumerRepository);
     });
 
     afterEach(() => {

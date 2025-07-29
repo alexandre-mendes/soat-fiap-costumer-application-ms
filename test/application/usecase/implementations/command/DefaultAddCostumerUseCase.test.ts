@@ -11,7 +11,8 @@ describe('Testa inclusão de cliente', () => {
     beforeEach(() => {
         mockCostumerRepository = {
             findByCpf: jest.fn(),
-            save: jest.fn()
+            save: jest.fn(),
+            findById: jest.fn()
         } as jest.Mocked<CostumerRepository>;
 
         addCostumerUseCase = new DefaultAddCostumerUseCase(mockCostumerRepository);
